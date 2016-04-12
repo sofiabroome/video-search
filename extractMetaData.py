@@ -8,7 +8,7 @@ def get_data(url):
     relevant fields in a dictionary. """
     datum = {}
     video = pafy.new(url)
-    datum['url'] = url
+    datum['url'] = url.strip()
     datum['description'] = video.description
     datum['author'] = video.author
     datum['duration'] = video.duration
@@ -28,18 +28,25 @@ def get_data(url):
 def extract_and_save_meta_data(urlFileName, metaDataFileName):
     """ Calls the metadataextractor for every url in the file name passed
     as an argument. """
-    metaData = {}
-    metaData["videos"] = []
     with open(urlFileName) as url_file:
         urls = url_file.readlines()
-        metaData['videos'] = [get_data(url) for url in urls]
+        metaData = {url.strip():get_data(url.strip()) for url in urls}
 
-    metaData = json.dumps(metaData, metaDataFileName, sort_keys=True, indent=4, separators=(",", ":"))
+    metaData = json.dumps(metaData, sort_keys=True, indent=4, separators=(",", ":"))
 
     with open(metaDataFileName,'w') as out_file:
         out_file.write(metaData)
+
+def read_meta_data(fileName):
+    """ Loads json data from file. """
+    with open(fileName) as meta_file:
+        meta = json.load(meta_file)
+    
+    return meta
 
 if __name__ == "__main__":
     url_file_name = "urls.txt"
     meta_data_file_name = "meta.txt"
     extract_and_save_meta_data(url_file_name, meta_data_file_name)
+    d = read_meta_data(meta_data_file_name)
+    print json.dumps(d, sort_keys=True, indent=4, separators=(",", ":"))
