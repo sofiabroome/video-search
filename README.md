@@ -4,7 +4,7 @@ IR project, Video Search
 Install requirements by
 `pip install -r requirements.txt`
 
-## Assignment description
+##### Assignment description
 
 "Your assignment will be to index around 1000 youtube clips which will be provided to you. You will have access to one or more video analysis api's which will do the hard machine learning part of converting video frames to textual keywords.
 
