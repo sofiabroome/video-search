@@ -1,0 +1,4 @@
+### Requirements
+
+pafy
+youtube-dl
