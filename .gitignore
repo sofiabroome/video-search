@@ -122,3 +122,8 @@ tramp
 
 # sftp configuration file
 sftp-config.json
+
+data_extraction/*.pyc
+data_extraction/*~
+
+
