@@ -23,15 +23,19 @@ def get_data(url):
   datum['username'] = video.username
   datum['viewcount'] = video.viewcount
   datum['rating'] = video.rating
+  datum['videoid'] = video.videoid
 
   return datum
 
 def extract_and_save_meta_data(url_file_name, meta_data_file_name):
   """ Calls the metadataextractor for every url in the file name passed
   as an argument. """
+  meta_data = {}
   with open(url_file_name) as url_file:
     urls = url_file.readlines()
-    meta_data = {url.strip():get_data(url.strip()) for url in urls}
+    for url in urls:
+      data = get_data(url.strip())
+      meta_data[data['videoid']] = data
 
   meta_data = json.dumps(meta_data)
 
