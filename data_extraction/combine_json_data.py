@@ -42,8 +42,10 @@ def combine_json_data(meta_data_file_name, path_to_video_data, out_file_name):
     data.append(values)
 
   with open(out_file_name, 'w') as out_file:
+    elastic_index_cmd = "{ \"index\": {}}\n"
     for datum in data:
       datum = json.dumps(datum)
+      out_file.write(elastic_index_cmd)
       out_file.write(datum+"\n")
 
   return data
