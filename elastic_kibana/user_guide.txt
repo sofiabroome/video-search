@@ -1,0 +1,38 @@
+See login_instructions.txt to get into elasticsearch host or copy files to elasticsearch host
+
+Installation:
+- elasticsearch
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
+- kibana
+https://www.elastic.co/guide/en/kibana/4.5/setup.html#setup-repositories
+
+Configuration:
+- mapping. We need to tell elasticsearch what format it should use to parse dates; "published" field
+$ curl -XPUT localhost:9200/vsearch -d '
+{
+  "mappings": {
+    "video": {
+      "dynamic_date_formats": ["yyyy-MM-d HH:mm:ss"]
+    }
+  }
+}
+';
+(more info https://www.elastic.co/guide/en/elasticsearch/reference/current//mapping.html)
+- list all existing indices
+$ curl 'localhost:9200/_cat/indices?v'
+- index data (into vsearch in below case)
+curl -XPOST 'localhost:9200/vsearch/video/_bulk?pretty' --data-binary @data.json 
+- show the index documents fields mapping
+$ curl -XGET 'http://localhost:9200/vsearch/_mapping?pretty'
+- search the index via kibana (Set results time range in the page top right corner; set to last 15min by default)
+[IP_ADDRESS]:5601
+
+Misc:
+- delete an index
+$ curl -XDELETE 'localhost:9200/vsearch'
+
+Elasticsearch and kibana tutorial:
+- install elasticsearch and kibana
+- go through below tutorial
+https://www.elastic.co/guide/en/kibana/4.5/getting-started.html
+
