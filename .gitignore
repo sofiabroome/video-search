@@ -1,8 +1,9 @@
 # -*- mode: gitignore; -*-
-# == Ignore .mp4s ==
+# == Ignore videos ==
 
+videos/
 *.mp4
-
+*.mkv
 # == Python stuff ==
 # Byte-compiled / optimized / DLL files
 __pycache__/
