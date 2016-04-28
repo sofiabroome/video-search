@@ -4,6 +4,7 @@ import json
 import sys
 from os import listdir
 from os.path import join
+import datetime
 
 def read_json_data(file_name):
   """ Loads json data from file. """
@@ -28,6 +29,11 @@ def read_video_data(path_to_video_data):
       data[name.split("_")[0]] = extract_descriptor(json_data)
   return data
 
+def duration_to_seconds(duration):
+  """returns the total seconds in a "string formatted" duration hh:mm:ss"""
+  h, m, s = map(int, duration.split(':'))
+  return datetime.timedelta(hours=h, minutes=m, seconds=s).total_seconds()
+
 def combine_json_data(meta_data_file_name, path_to_video_data, out_file_name):
   """Combines the meta data with video descriptors and writes to a file."""
   print "combine"
@@ -37,6 +43,7 @@ def combine_json_data(meta_data_file_name, path_to_video_data, out_file_name):
   for (key, values) in meta_data.items():
     try:
       values["descriptor"] = video_descriptors[key]
+      values["duration"] = duration_to_seconds(values["duration"])
     except KeyError:
       print "video descriptor for {} was not found".format(key)
     data.append(values)

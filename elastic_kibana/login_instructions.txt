@@ -1,0 +1,17 @@
+Overview :
+- elasticsearch and kibana are running on a Google cloud virtual machine
+- ssh login is supported; your public key needs to be added to the VM
+
+Steps :
+since this file is in a public github repo :) i will send the IP_ADDRESS and username seprately
+- generate new ssh-key pair as below ([username] is the vm username)
+$ ssh-keygen -t rsa -f ~/.ssh/my-gce-ssh-key -C [username]
+- send me your public key (output of below cmd) to add it to the vm known keys
+$ cat ~/.ssh/my-gce-ssh-key.pub
+- run below to login 
+$ ssh -i ~/.ssh/my-ssh-key [username]@[IP_ADDRESS]
+- transfer a file
+$ scp -i ~/.ssh/my-gce-ssh-key.pub data.json  [username]@[IP_ADDRESS]:/home/mohamedaziz52/data/data.json
+
+
+
