@@ -1,4 +1,9 @@
 # -*- mode: gitignore; -*-
+
+# == temporarily ignore .json ==
+
+*.json
+
 # == Ignore videos ==
 
 videos/
