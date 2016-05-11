@@ -15,19 +15,19 @@ def read_json_data(file_name):
     return data
 
 def expand_query(words, lu):
-    """ Expands query to include mother categories (hyponyms) from 
+    """ Expands query to include mother categories (hypernyms) from 
 	Wordnet as many levels up as the method parameter lu is set to."""
     expansion = []
     for word in words.split(" "):
         ss = wn.synsets(word)
 	first_ss = ss[0]
-	hyponyms = first_ss.hypernym_paths()
-	for hypo in hyponyms:
+	hypernyms = first_ss.hypernym_paths()
+	for hyper in hypernyms:
 	    for l in range(1,lu+1):		
-		one_hypo = hypo[-(l+1):-(l)]
-		hypo_clean = find_between(str(one_hypo), "Synset('", ".n")
-		if hypo_clean not in expansion:
-		    expansion.append(hypo_clean)
+		one_hyper = hyper[-(l+1):-(l)]
+		hyper_clean = find_between(str(one_hyper), "Synset('", ".")
+	if hyper_clean not in expansion:
+		    expansion.append(hyper_clean)
     expansion_string = " ".join(expansion)
     expanded_query = " ".join([words, expansion_string])
     """ Returns the expanded query as a string with space-separated words """
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     ARGV = sys.argv
     if len(ARGV) == 1:
 	print """ usage: python wordnetscript.py <jsondata file>
-		  <no of considered hyponyms per word> """
+		  <no of considered hypernyms per word> """
     elif len(ARGV) == 3:
         JSON_DATA_FILE = ARGV[1]
         lu = int(ARGV[2])
