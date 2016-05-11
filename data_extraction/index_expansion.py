@@ -8,6 +8,9 @@ def expand_index(words, lu):
     expansion = []
     for word in words.split(" "):
         ss = wn.synsets(word)
+        # some words like "of" has no hypernyms in wordnet; we should skip expanding these
+        if len(ss) == 0:
+            continue
         first_ss = ss[0]
         hypernyms = first_ss.hypernym_paths()
         for hypers in hypernyms:
