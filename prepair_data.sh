@@ -12,4 +12,4 @@ for i in $( ls videos ); do
 	# fi
 done
 
-python data_extraction/combine_json_data.py data_extraction/meta.txt videos data.json
+python data_extraction/combine_json_data.py data_extraction/meta.txt videos data.json 2
