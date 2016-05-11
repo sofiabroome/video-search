@@ -1,0 +1,17 @@
+1. search for "to be" in field title, ignoring wordorder:
+
+title:to title:be
+
+2. phrase search
+
+title:"to be"
+
+3. Searching using more than one field with equal weights:
+
+title:to title:be descriptor:to descriptor:be
+
+4.  Bost the importance of a specific field by grouping all the terms of that field and add ^number
+
+title:to title:be (descriptor:to descriptor:be)^10
+
+terms within the parenthesis are now 10 times more important.
