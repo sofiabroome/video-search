@@ -22,6 +22,7 @@ def extract_descriptor(json_data):
   """Compile the thingscoop output into a long text string"""
   samples = [sample[1] for sample in json_data]
   words = [word[0].replace("_", " ") for sample in samples for word in sample[:1] ]
+  words = [word for word in words if word not in STOP_WORDS]
   return " ".join(words)
 
 def read_video_data(path_to_video_data, nr_hypernyms):
