@@ -7,6 +7,11 @@ from os.path import join
 import datetime
 import index_expansion
 
+
+STOP_WORDS = set(["artifact", 
+                  "device",
+                  "instrumentality"])
+
 def read_json_data(file_name):
   """ Loads json data from file. """
   with open(file_name) as json_file:
@@ -16,7 +21,7 @@ def read_json_data(file_name):
 def extract_descriptor(json_data):
   """Compile the thingscoop output into a long text string"""
   samples = [sample[1] for sample in json_data]
-  words = [word[0].replace("_", " ") for sample in samples for word in sample]
+  words = [word[0].replace("_", " ") for sample in samples for word in sample[:1] ]
   return " ".join(words)
 
 def read_video_data(path_to_video_data, nr_hypernyms):
