@@ -10,7 +10,28 @@ import index_expansion
 
 STOP_WORDS = set(["artifact", 
                   "device",
-                  "instrumentality"])
+                  "instrumentality", 
+                  "chordate", 
+                  "placental", 
+                  "vertebrate", 
+                  "organism", 
+                  "living", 
+                  "thing", 
+                  "oxygen", 
+                  "structure", 
+                  "conveyance", 
+                  "mammal", 
+                  "mercantile", 
+                  "web", 
+                  "site", 
+                  "horizontal", 
+                  "big", 
+                  "goods", 
+                  "commodity", 
+                  "appliance", 
+                  "covering", 
+                  "equipment", 
+                  "implement"])
 
 def read_json_data(file_name):
   """ Loads json data from file. """
