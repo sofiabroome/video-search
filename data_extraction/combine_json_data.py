@@ -73,10 +73,16 @@ def combine_json_data(meta_data_file_name, path_to_video_data, out_file_name, nr
   for (key, values) in meta_data.items():
     try:
       values["descriptor"] = video_descriptors[key]
-      values["expanded_descriptor"] = expanded_descriptors[key]
-      values["duration"] = duration_to_seconds(values["duration"])
     except KeyError:
       print "Video descriptor for {} was not found".format(key)
+    try:
+      values["expanded_descriptor"] = expanded_descriptors[key]
+    except KeyError:
+      print "Video expanded_descriptor for {} was not found".format(key)
+    try:
+      values["duration"] = duration_to_seconds(values["duration"])
+    except KeyError:
+      print "Video duration for {} was not found".format(key)            
     data.append(values)
 
   with open(out_file_name, 'w') as out_file:
